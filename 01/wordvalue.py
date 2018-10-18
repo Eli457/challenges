@@ -4,13 +4,13 @@ from data import DICTIONARY, LETTER_SCORES
 def load_words():
     """Load dictionary into a list and return list"""
     file = open('dictionary.txt')
-    l = []
+    d_list = []
 
     for line in file:
-        l.append(line.strip())
+        d_list.append(line.strip())
 
     file.close()
-    return l
+    return d_list
 
 
 def calc_word_value(word):
@@ -25,17 +25,25 @@ def calc_word_value(word):
     return total
 
 
-def max_word_value(list):
+def max_word_value(u_list=load_words()):
     """Calculate the word with the max value, can receive a list
     of words as arg, if none provided uses default DICTIONARY"""
-    
 
-    pass
+    max = calc_word_value(u_list[0])
+    r_word = u_list[0]
+
+    for word in u_list:
+        if calc_word_value(word) > max:
+            max = calc_word_value(word)
+            r_word = word
+
+    return r_word
 
 
 if __name__ == "__main__":
     #pass# run unittests to validate
     load_words()
     print(calc_word_value('Hello'))
+    print(max_word_value())
 
 
